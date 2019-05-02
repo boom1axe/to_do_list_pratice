@@ -19,3 +19,59 @@ testItem.description = "lecture advance javascript";
 testItem.startDate = new Date("April 30, 2019");
 testItem.isComplete = item;
 */
+
+//when add item is clicked get data and wrap in a todo  object
+//Notify user and clear form
+//Save todo object
+
+window.onload = function() {
+    let addBtn = <HTMLButtonElement>
+        document.querySelector("#create-item > button");
+    addBtn.onclick = processNewItem;
+}
+
+function processNewItem() {
+    let item:ToDoItem = getItemFromForm();
+    saveItem(item);
+    notifyUser();
+    clearForm();
+}
+
+function saveItem(item:ToDoItem):void{
+    // user is/can use localStorage
+    if (typeof(Storage) != "undefined") {
+        localStorage.setItem("todo", item.title);
+    }
+}
+
+/**
+ * Get all user input from form
+ * and wrap it in a ToDoItem 
+ */
+function getItemFromFrom():ToDoItem{
+    let item = new ToDoItem();
+
+    item.title = (<HTMLInputElement>
+        document.getElementById("title")).value;
+    item.description = (<HTMLTextAreaElement>
+        document.getElementById("description")).value;
+    
+    let itemStartDate:string = (<htmlInputElement> 
+        document.getElementById("start-date")).value;
+    item.endDate = new Date(itemStartDate);
+
+    
+    let itemStartDate:string = (<htmlInputElement> 
+        document.getElementById("end-date")).value;
+    item.endDate = new Date(itemEndDate);
+
+
+    item.isComplete = (<HTMLInputElement>document.getElementById("is-complete")).checked;
+
+    let urgencyElem = <HTMLSelectElement>
+        document.getElementById("urgency");
+    item.urgency =
+        urgencyElem.options[urgencyElem.selectedIndex].text;
+
+    return item;
+}
