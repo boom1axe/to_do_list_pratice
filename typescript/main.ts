@@ -37,10 +37,39 @@ function processNewItem() {
     clearForm();
 }
 
+function clearForm() {
+    
+
+    //clear all textboxs and textarea
+    let textElements =
+        document.querySelectorAll("input[type=text], textarea");
+    for (let i = 0; i < textElements.length; i++) {
+        (<HTMLInputElement>textElements[i]).value = "";
+    }
+
+    //uncheck is complete
+    let isCompleteBox =
+        document.querySelector("#is-complete");
+    isCompleteBox.checked = false;
+
+    //reset select list
+}
+
+function notifyUser(){
+    alert("your item was saved");
+}
+
+
+
 function saveItem(item:ToDoItem):void{
+
+    let data:string. JSON.stringify(item);
+    console.log("Converting todoitem into JSON string...");
+    console.log(data);
+
     // user is/can use localStorage
     if (typeof(Storage) != "undefined") {
-        localStorage.setItem("todo", item.title);
+        localStorage.setItem("todo", data);
     }
 }
 
