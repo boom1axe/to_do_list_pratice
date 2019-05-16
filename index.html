@@ -55,8 +55,18 @@
         <button type="button">Read Item</button>
     </div>
 
+    <div id="todo-list"></div>
+
     <script src="node_modules/js-datepicker/dist/datepicker.min.css"></script>
     <script src="scripts/main.js"></script>
-    <script>const picker = datepicker(".due-date")</script>
+    <script>
+        //loop through all "due-date" class elements
+        //and add the datepicker
+        let allDateElem = document.querySelectorAll(".due-date");
+        for (let i = 0; i < allDateElem.length; i++) {
+            datepicker(allDateElem[i]);
+            
+        }
+    </script>
 </body>
 </html>
